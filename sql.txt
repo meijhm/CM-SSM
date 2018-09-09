@@ -1,0 +1,130 @@
+#实现了业主自助缴纳费用、查看和修改自身的相关信息
+#以及管理员对小区内部的各种综合信息和小区设备的整理、物业费用的录入等功能
+drop database if exists community_manage;
+create database community_manage;
+use community_manage;
+#管理员
+drop table if exists admin;
+create table admin(
+aId int not null auto_increment primary key,
+aName char(10) not null,
+aPwd varchar(50) not null,
+a_img  varchar(50) not null
+)engine=INNODB auto_increment=100 default charset=utf8;
+#业主注册信息
+drop table if exists loginuser;
+create table loginuser(
+l_id int not null auto_increment primary key,
+l_name char(20) not null comment '业主登录名',
+l_pwd varchar(50) not null comment '业主登录密码'
+)engine=INNODB auto_increment=100 default charset=utf8;
+#业主
+drop table if exists user;
+create table user(
+uId int not null auto_increment primary key,
+uCode char(20) not null comment '业主编号',
+uName char(10) not null comment '业主名',
+uPwd varchar(50) not null,
+uSex char(2) default null,
+uPhone char(15) not null,
+uStartTime datetime not null comment '入住时间',
+uPeopleNum int not null comment '入住人数',
+uHouseCode char(50) not null comment '房间位置',
+utheme char(6),
+hId int not null
+)engine=INNODB auto_increment=100 default charset=utf8;
+#维修员
+drop table if exists staffRepair;
+create table staffRepair(
+sId int not null auto_increment primary key,
+sCode varchar(20) not null comment '维修人员编号',
+sName varchar(10) not null comment '维修人员名字',
+sPwd varchar(50) not null,
+sSex char(2) not null,
+sPhone varchar(15) not null comment '维修人员电话',
+sEvaluate double not null comment '好评率',
+stheme char(6)
+)engine=INNODB auto_increment=100 default charset=utf8;
+#楼房
+drop table if exists house;
+create table house(
+hId int not null auto_increment primary key,
+hCode varchar(20) not null comment '楼房编号',
+hSite varchar(50) not null comment '楼房位置',
+hArea int not null comment '楼房面积',
+hHeight int not null comment '房子层数'
+)engine=INNODB auto_increment=100 default charset=utf8;
+#收费项目
+drop table if exists chargeItem;
+create table chargeItem(
+cId int not null auto_increment primary key,
+cCode varchar(20) not null comment '收费项目编号',
+cName varchar(10) not null comment '收费名称',
+cMoney varchar(10) not null comment '收费标准'
+)engine=INNODB auto_increment=100 default charset=utf8;
+#缴欠费信息
+drop table if exists payInfo;
+create table payInfo(
+pId int not null auto_increment primary key,
+pCode varchar(20) not null comment '缴欠费编号',
+pTime datetime not null comment '缴费时间',
+pMoney int not null comment '缴收费用',
+pInfo varchar(50) not null comment '缴欠费信息',
+pStatus varchar(10) not null comment '缴欠费状态',
+cId int not null,
+uId int not null
+)engine=INNODB auto_increment=100 default charset=utf8;
+#申请维修信息
+drop table if exists repairInfo;
+create table repairInfo(
+rId int not null auto_increment primary key,
+rCode varchar(20) not null comment '维修单编号',
+rTime datetime not null comment '维修申请时间',
+rDetail varchar(1000) not null comment '维修内容',
+rStatus varchar(10) not null comment '维修状态',
+uId int not null
+)engine=INNODB auto_increment=100 default charset=utf8;
+#维修处理信息
+drop table if exists doRepair;
+create table doRepair(
+dId int not null auto_increment primary key,
+dTime datetime not null comment '上门维修时间',
+dMoney int not null comment '维修估计费用',
+sId int not null,
+rId int not null
+)engine=INNODB auto_increment=100 default charset=utf8;
+#对话管理员消息
+-- drop table if exists talkAdmin;
+-- create table talkAdmin(
+-- ta_id int not null auto_increment primary key,
+-- ta_msg varchar(520) not null comment '联系内容',
+-- ta_time datetime not null comment '联系时间',
+-- l_id int not null
+-- )engine=INNODB auto_increment=100 default charset=utf8;
+#管理员回复消息
+-- drop table if exists talkRepair;
+-- create table talkRepair(
+-- tr_id int not null auto_increment primary key,
+-- tr_msg varchar(520) not null comment '联系内容',
+-- tr_time datetime not null comment '联系时间',
+-- aId int not null
+-- )engine=INNODB auto_increment=100 default charset=utf8;
+#用户动态信息
+drop table if exists moving;
+create table moving(
+m_id int not null auto_increment primary key,
+m_time datetime not null comment '发送时间',
+m_msg varchar(1000) not null comment '动态内容',
+l_name char(20) not null
+)engine=INNODB auto_increment=100 default charset=utf8;
+
+use community_manage;
+insert into admin values(NULL,"admin","admin","user-medium.png");
+insert into house values(null,"居3栋","在中心广场对面，门牌号3001",20,101),(null,"居4栋","在中心广场附近，门牌号4001",30,100);
+insert into user values(null,'业主0001',"张三","123","男","15744552344","2017-8-16",4,"1单元-301","红色",100),(null,'业主0002',"李四","1234","男","17744551344","2017-8-16",5,"2单元-301","红色",101);
+insert into staffRepair values(null,"wx1001","王师傅","123","男","19922337654",0.88,"蓝色"),(null,"wx1011","李师傅","123","男","13922337654",0.85,"绿色"),(null,"wx0000","暂无","1","男","139234337654",1,"绿色");
+insert into chargeItem values(null,"d1001","电费","1元/度"),(null,"s1005","水费","10元/吨");
+insert into payInfo values(null,"user1012","2017-8-17",700,"交了电费","已收取",101,100),(null,"user1022","2017-8-17",300,"要交水费了","未收取",100,101);
+insert into repairInfo values(null,"wxd1223","2017-8-19",'<img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/0.gif" alt="[微笑]">电视坏了，需要维修',"未受理",100),(null,"wxd1333","2017-8-20",'空调坏了，需要维修<img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/36.gif" alt="[酷]"><img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/36.gif" alt="[酷]"><img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/57.gif" alt="[来]">',"未受理",101);
+insert into doRepair values(null,"2017-8-20",70,100,101),(null,"2017-8-21",90,101,100);
+insert into loginuser values(null,"张三","202cb962ac59075b964b07152d234b70"),(null,"李四","81dc9bdb52d04dc20036dbd8313ed055");
