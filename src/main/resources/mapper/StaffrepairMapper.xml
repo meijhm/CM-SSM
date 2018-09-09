@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.cmssm.dao.StaffrepairMapper">
+  <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.Staffrepair">
+    <id column="sId" jdbcType="INTEGER" property="sid" />
+    <result column="sCode" jdbcType="VARCHAR" property="scode" />
+    <result column="sName" jdbcType="VARCHAR" property="sname" />
+    <result column="sPwd" jdbcType="VARCHAR" property="spwd" />
+    <result column="sSex" jdbcType="CHAR" property="ssex" />
+    <result column="sPhone" jdbcType="VARCHAR" property="sphone" />
+    <result column="sEvaluate" jdbcType="DOUBLE" property="sevaluate" />
+    <result column="stheme" jdbcType="CHAR" property="stheme" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from staffrepair
+    where sId = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mjh.cmssm.domain.Staffrepair">
+    insert into staffrepair (sId, sCode, sName, 
+      sPwd, sSex, sPhone, sEvaluate, 
+      stheme)
+    values (#{sid,jdbcType=INTEGER}, #{scode,jdbcType=VARCHAR}, #{sname,jdbcType=VARCHAR}, 
+      #{spwd,jdbcType=VARCHAR}, #{ssex,jdbcType=CHAR}, #{sphone,jdbcType=VARCHAR}, #{sevaluate,jdbcType=DOUBLE}, 
+      #{stheme,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.Staffrepair">
+    update staffrepair
+    set sCode = #{scode,jdbcType=VARCHAR},
+      sName = #{sname,jdbcType=VARCHAR},
+      sPwd = #{spwd,jdbcType=VARCHAR},
+      sSex = #{ssex,jdbcType=CHAR},
+      sPhone = #{sphone,jdbcType=VARCHAR},
+      sEvaluate = #{sevaluate,jdbcType=DOUBLE},
+      stheme = #{stheme,jdbcType=CHAR}
+    where sId = #{sid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select sId, sCode, sName, sPwd, sSex, sPhone, sEvaluate, stheme
+    from staffrepair
+    where sId = #{sid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select sId, sCode, sName, sPwd, sSex, sPhone, sEvaluate, stheme
+    from staffrepair
+  </select>
+</mapper>

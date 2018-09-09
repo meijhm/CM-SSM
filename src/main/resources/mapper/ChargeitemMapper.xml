@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.cmssm.dao.ChargeitemMapper">
+  <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.Chargeitem">
+    <id column="cId" jdbcType="INTEGER" property="cid" />
+    <result column="cCode" jdbcType="VARCHAR" property="ccode" />
+    <result column="cName" jdbcType="VARCHAR" property="cname" />
+    <result column="cMoney" jdbcType="VARCHAR" property="cmoney" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from chargeitem
+    where cId = #{cid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mjh.cmssm.domain.Chargeitem">
+    insert into chargeitem (cId, cCode, cName, 
+      cMoney)
+    values (#{cid,jdbcType=INTEGER}, #{ccode,jdbcType=VARCHAR}, #{cname,jdbcType=VARCHAR}, 
+      #{cmoney,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.Chargeitem">
+    update chargeitem
+    set cCode = #{ccode,jdbcType=VARCHAR},
+      cName = #{cname,jdbcType=VARCHAR},
+      cMoney = #{cmoney,jdbcType=VARCHAR}
+    where cId = #{cid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select cId, cCode, cName, cMoney
+    from chargeitem
+    where cId = #{cid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select cId, cCode, cName, cMoney
+    from chargeitem
+  </select>
+</mapper>

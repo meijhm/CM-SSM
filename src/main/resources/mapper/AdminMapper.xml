@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.cmssm.dao.AdminMapper">
+  <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.Admin">
+    <id column="aId" jdbcType="INTEGER" property="aid" />
+    <result column="aName" jdbcType="CHAR" property="aname" />
+    <result column="aPwd" jdbcType="VARCHAR" property="apwd" />
+    <result column="a_img" jdbcType="VARCHAR" property="aImg" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from admin
+    where aId = #{aid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mjh.cmssm.domain.Admin">
+    insert into admin (aId, aName, aPwd, 
+      a_img)
+    values (#{aid,jdbcType=INTEGER}, #{aname,jdbcType=CHAR}, #{apwd,jdbcType=VARCHAR}, 
+      #{aImg,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.Admin">
+    update admin
+    set aName = #{aname,jdbcType=CHAR},
+      aPwd = #{apwd,jdbcType=VARCHAR},
+      a_img = #{aImg,jdbcType=VARCHAR}
+    where aId = #{aid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select aId, aName, aPwd, a_img
+    from admin
+    where aId = #{aid,jdbcType=INTEGER}
+  </select>
+  <select id="getAdminByName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select aId, aName, aPwd, a_img
+    from admin
+    where aName = #{aName}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select aId, aName, aPwd, a_img
+    from admin
+  </select>
+</mapper>

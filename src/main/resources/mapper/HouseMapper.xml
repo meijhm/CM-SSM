@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.cmssm.dao.HouseMapper">
+	<!--redis缓存-->
+  <cache type="com.mjh.cmssm.dao.RedisCache"/>
+  <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.House">
+    <id column="hId" jdbcType="INTEGER" property="hid" />
+    <result column="hCode" jdbcType="VARCHAR" property="hcode" />
+    <result column="hSite" jdbcType="VARCHAR" property="hsite" />
+    <result column="hArea" jdbcType="INTEGER" property="harea" />
+    <result column="hHeight" jdbcType="INTEGER" property="hheight" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from house
+    where hId = #{hid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mjh.cmssm.domain.House">
+    insert into house (hId, hCode, hSite, 
+      hArea, hHeight)
+    values (#{hid,jdbcType=INTEGER}, #{hcode,jdbcType=VARCHAR}, #{hsite,jdbcType=VARCHAR}, 
+      #{harea,jdbcType=INTEGER}, #{hheight,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.House">
+    update house
+    set hCode = #{hcode,jdbcType=VARCHAR},
+      hSite = #{hsite,jdbcType=VARCHAR},
+      hArea = #{harea,jdbcType=INTEGER},
+      hHeight = #{hheight,jdbcType=INTEGER}
+    where hId = #{hid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select hId, hCode, hSite, hArea, hHeight
+    from house
+    where hId = #{hid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select hId, hCode, hSite, hArea, hHeight
+    from house
+  </select>
+</mapper>

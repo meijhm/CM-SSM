@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.cmssm.dao.DorepairMapper">
+  <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.Dorepair">
+    <id column="dId" jdbcType="INTEGER" property="did" />
+    <result column="dTime" jdbcType="TIMESTAMP" property="dtime" />
+    <result column="dMoney" jdbcType="INTEGER" property="dmoney" />
+    <result column="sId" jdbcType="INTEGER" property="sid" />
+    <result column="rId" jdbcType="INTEGER" property="rid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from dorepair
+    where dId = #{did,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mjh.cmssm.domain.Dorepair">
+    insert into dorepair (dId, dTime, dMoney, 
+      sId, rId)
+    values (#{did,jdbcType=INTEGER}, #{dtime,jdbcType=TIMESTAMP}, #{dmoney,jdbcType=INTEGER}, 
+      #{sid,jdbcType=INTEGER}, #{rid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.Dorepair">
+    update dorepair
+    set dTime = #{dtime,jdbcType=TIMESTAMP},
+      dMoney = #{dmoney,jdbcType=INTEGER},
+      sId = #{sid,jdbcType=INTEGER},
+      rId = #{rid,jdbcType=INTEGER}
+    where dId = #{did,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select dId, dTime, dMoney, sId, rId
+    from dorepair
+    where dId = #{did,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select dId, dTime, dMoney, sId, rId
+    from dorepair
+  </select>
+</mapper>

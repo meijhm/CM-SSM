@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.cmssm.dao.PayinfoMapper">
+  <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.Payinfo">
+    <id column="pId" jdbcType="INTEGER" property="pid" />
+    <result column="pCode" jdbcType="VARCHAR" property="pcode" />
+    <result column="pTime" jdbcType="TIMESTAMP" property="ptime" />
+    <result column="pMoney" jdbcType="INTEGER" property="pmoney" />
+    <result column="pInfo" jdbcType="VARCHAR" property="pinfo" />
+    <result column="pStatus" jdbcType="VARCHAR" property="pstatus" />
+    <result column="cId" jdbcType="INTEGER" property="cid" />
+    <result column="uId" jdbcType="INTEGER" property="uid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from payinfo
+    where pId = #{pid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mjh.cmssm.domain.Payinfo">
+    insert into payinfo (pId, pCode, pTime, 
+      pMoney, pInfo, pStatus, 
+      cId, uId)
+    values (#{pid,jdbcType=INTEGER}, #{pcode,jdbcType=VARCHAR}, #{ptime,jdbcType=TIMESTAMP}, 
+      #{pmoney,jdbcType=INTEGER}, #{pinfo,jdbcType=VARCHAR}, #{pstatus,jdbcType=VARCHAR}, 
+      #{cid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.Payinfo">
+    update payinfo
+    set pCode = #{pcode,jdbcType=VARCHAR},
+      pTime = #{ptime,jdbcType=TIMESTAMP},
+      pMoney = #{pmoney,jdbcType=INTEGER},
+      pInfo = #{pinfo,jdbcType=VARCHAR},
+      pStatus = #{pstatus,jdbcType=VARCHAR},
+      cId = #{cid,jdbcType=INTEGER},
+      uId = #{uid,jdbcType=INTEGER}
+    where pId = #{pid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select pId, pCode, pTime, pMoney, pInfo, pStatus, cId, uId
+    from payinfo
+    where pId = #{pid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select pId, pCode, pTime, pMoney, pInfo, pStatus, cId, uId
+    from payinfo
+  </select>
+</mapper>

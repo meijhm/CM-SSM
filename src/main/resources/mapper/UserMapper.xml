@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mjh.cmssm.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.User">
+    <id column="uId" jdbcType="INTEGER" property="uid" />
+    <result column="uCode" jdbcType="CHAR" property="ucode" />
+    <result column="uName" jdbcType="CHAR" property="uname" />
+    <result column="uPwd" jdbcType="VARCHAR" property="upwd" />
+    <result column="uSex" jdbcType="CHAR" property="usex" />
+    <result column="uPhone" jdbcType="CHAR" property="uphone" />
+    <result column="uStartTime" jdbcType="TIMESTAMP" property="ustarttime" />
+    <result column="uPeopleNum" jdbcType="INTEGER" property="upeoplenum" />
+    <result column="uHouseCode" jdbcType="CHAR" property="uhousecode" />
+    <result column="utheme" jdbcType="CHAR" property="utheme" />
+    <result column="hId" jdbcType="INTEGER" property="hid" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where uId = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mjh.cmssm.domain.User">
+    insert into user (uId, uCode, uName, 
+      uPwd, uSex, uPhone, uStartTime, 
+      uPeopleNum, uHouseCode, utheme, 
+      hId)
+    values (#{uid,jdbcType=INTEGER}, #{ucode,jdbcType=CHAR}, #{uname,jdbcType=CHAR}, 
+      #{upwd,jdbcType=VARCHAR}, #{usex,jdbcType=CHAR}, #{uphone,jdbcType=CHAR}, #{ustarttime,jdbcType=TIMESTAMP}, 
+      #{upeoplenum,jdbcType=INTEGER}, #{uhousecode,jdbcType=CHAR}, #{utheme,jdbcType=CHAR}, 
+      #{hid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.User">
+    update user
+    set uCode = #{ucode,jdbcType=CHAR},
+      uName = #{uname,jdbcType=CHAR},
+      uPwd = #{upwd,jdbcType=VARCHAR},
+      uSex = #{usex,jdbcType=CHAR},
+      uPhone = #{uphone,jdbcType=CHAR},
+      uStartTime = #{ustarttime,jdbcType=TIMESTAMP},
+      uPeopleNum = #{upeoplenum,jdbcType=INTEGER},
+      uHouseCode = #{uhousecode,jdbcType=CHAR},
+      utheme = #{utheme,jdbcType=CHAR},
+      hId = #{hid,jdbcType=INTEGER}
+    where uId = #{uid,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select uId, uCode, uName, uPwd, uSex, uPhone, uStartTime, uPeopleNum, uHouseCode, 
+    utheme, hId
+    from user
+    where uId = #{uid,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select uId, uCode, uName, uPwd, uSex, uPhone, uStartTime, uPeopleNum, uHouseCode, 
+    utheme, hId
+    from user
+  </select>
+</mapper>
