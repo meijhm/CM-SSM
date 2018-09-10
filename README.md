@@ -7,8 +7,10 @@
 **技术点：**  
 &emsp;&emsp;使用Mybatis分页插件PageHelper  
 &emsp;&emsp;使用redis做Mybatis的二级缓存  
-&emsp;&emsp;使用Spring 自带的md5加密工具类  
-&emsp;&emsp;使用Tomcat搭建图片服务器  
+&emsp;&emsp;使用Spring自带的md5加密工具类  
+&emsp;&emsp;使用Tomcat搭建图片服务器，使用commons-fileupload文件上传组件上传文件  
+&emsp;&emsp;使用Spring的拦截器控制访问  
+&emsp;&emsp;使用阿里巴巴的druid连接池  
 &emsp;&emsp;maven项目  
 &emsp;&emsp;使用ssm框架  
 &emsp;&emsp;后台bootstrap前端框架  
