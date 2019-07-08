@@ -1,48 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mjh.cmssm.dao.LoginUserMapper">
+	<!--redis缓存-->
+  <cache type="com.mjh.cmssm.dao.RedisCache"/>
   <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.LoginUser">
-    <id column="lId" jdbcType="INTEGER" property="lid" />
-    <result column="lName" jdbcType="CHAR" property="lname" />
-    <result column="lPwd" jdbcType="VARCHAR" property="lpwd" />
-    <result column="lHeadImg" jdbcType="VARCHAR" property="lheadimg" />
-    <result column="utheme" jdbcType="CHAR" property="utheme" />
+    <id column="l_id" jdbcType="INTEGER" property="lId" />
+    <result column="l_name" jdbcType="CHAR" property="lName" />
+    <result column="l_pwd" jdbcType="VARCHAR" property="lPwd" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from loginuser
-    where lId = #{lid,jdbcType=INTEGER}
+    where l_id = #{lId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.mjh.cmssm.domain.LoginUser">
-    insert into loginuser (lId, lName, lPwd, 
-      lHeadImg, utheme)
-    values (#{lid,jdbcType=INTEGER}, #{lname,jdbcType=CHAR}, #{lpwd,jdbcType=VARCHAR}, 
-      #{lheadimg,jdbcType=VARCHAR}, #{utheme,jdbcType=CHAR})
+    insert into loginuser (l_id, l_name, l_pwd
+      )
+    values (#{lId,jdbcType=INTEGER}, #{lName,jdbcType=CHAR}, #{lPwd,jdbcType=VARCHAR}
+      )
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.mjh.cmssm.domain.LoginUser">
     update loginuser
-    set lName = #{lname,jdbcType=CHAR},
-      lPwd = #{lpwd,jdbcType=VARCHAR},
-      lHeadImg = #{lheadimg,jdbcType=VARCHAR},
-      utheme = #{utheme,jdbcType=CHAR}
-    where lId = #{lid,jdbcType=INTEGER}
+    set l_name = #{lName,jdbcType=CHAR},
+      l_pwd = #{lPwd,jdbcType=VARCHAR}
+    where l_id = #{lId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select lId, lName, lPwd, lHeadImg, utheme
+    select l_id, l_name, l_pwd
     from loginuser
-    where lId = #{lid,jdbcType=INTEGER}
-  </select>
-  <select id="selectByUserName" parameterType="java.lang.String" resultType="Integer">
-    select count(lName)
-    from loginuser
-    where lName = #{lName}
+    where l_id = #{lId,jdbcType=INTEGER}
   </select>
   <select id="selectgetUserByName" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select lId, lName, lPwd, lHeadImg, utheme
+    select l_id, l_name, l_pwd
     from loginuser
-    where lName = #{lName}
+    where l_name = #{l_name}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select lId, lName, lPwd, lHeadImg, utheme
+    select l_id, l_name, l_pwd
     from loginuser
   </select>
 </mapper>

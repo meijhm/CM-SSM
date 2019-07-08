@@ -3,83 +3,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>登录</title>
+	<%@include file="/common/head.jsp" %>
+	<link rel="stylesheet" href="${basePath}/resources/vendor/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="${basePath}/resources/vendor/linearicons/style.css">
+	<!-- MAIN CSS -->
+	<link rel="stylesheet" href="${basePath}/resources/vendor/css/main.css">
+	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<link rel="stylesheet" href="${basePath}/resources/vendor/css/demo.css">
+	<!-- GOOGLE FONTS -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+	<!-- ICONS -->
+	<link rel="apple-touch-icon" sizes="76x76" href="${basePath}/resources/images/admin/apple-icon.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="${basePath}/resources/images/admin/favicon.png">
 </head>
 <body>
 <% 
-String msg = (String)session.getAttribute("msg");
-/* if(msg!=null){
-	out.print("<script>alert('验证码忽略大小写,验证码错误!');</script>");
-} */
-//out.print("<script>alert('"+msg+"');</script>");
-if("验证码错误".equals(msg)){
+String msg = (String)request.getAttribute("msg");
+if(msg != null){
 	session.invalidate();
-	out.print("<script>alert('验证码忽略大小写,验证码错误!');</script>");
+	out.print("<script>alert('"+msg+"');</script>");
 }
+
 %>
-<%-- <jsp:include page="aa.jsp"></jsp:include> --%>
-<div id="loginbox">
-			<form style="height: 450px;" action="${ pageContext.request.contextPath }/login" method="post">
-				<div class="control-group normal_text">
-					<h4>
-						<img style="border:0;vertical-align:middle;border-radius: 50%;width: 80px;height: 80px;" src="${ pageContext.request.contextPath }/login/public.png" id="headImg" alt="未注册" />
-					</h4>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<div class="main_input_box">
-							<span class="add-on bg_lg">
-							<img id="imgLogo" height="37" src="${ pageContext.request.contextPath }/login/user.png" />
-							</span><input type="text" onblur="getNameText()" id="username" name="uname" placeholder="请输入用户名" />
+<div style="margin-top: 10px;margin-left: 85%;margin-bottom: -25px;">没有账号?<a href="${basePath}/appreg">前往注册</a></div>
+<!-- WRAPPER -->
+	<div id="wrapper" style="margin-top:60px;">
+		<div class="vertical-align-wrap">
+			<div class="vertical-align-middle">
+				<div class="auth-box ">
+					<div class="left">
+						<div class="content" style="width: 98%">
+							<div class="header">
+								<div class="logo text-center"><img src="${basePath}/resources/images/admin/logo.png" alt="Amazing"></div>
+								<p class="lead">快进入这个Amazing的小区社区</p>
+							</div>
+							<form class="form-auth-small" action="${basePath}/user/login" method="post">
+								<div class="form-group">
+									<label for="signin-email" class="control-label sr-only">用户名</label>
+									<input type="text" class="form-control" name="lName" id="signin-email" placeholder="您的用户名...">
+								</div>
+								<div class="form-group">
+									<label for="signin-password" class="control-label sr-only">密码</label>
+									<input type="password" class="form-control" name="lPwd" id="signin-password" placeholder="您的密码...">
+								</div>
+								<div class="form-group">
+									<label for="signin-yzm" class="control-label sr-only">验证码</label>
+									<input type="text" class="form-control" name="code" id="signin-yzm" placeholder="请输入验证码...">
+									<img src="${basePath}/image?time=12" id="scode" onclick="changeCode()"/>
+									<span id="checkcode_span"></span>
+									<br>
+								</div>
+								
+								<div class="form-group clearfix">
+									选择免登录的时间
+									<select name="noLogin">
+										<option value="3min">3分钟</option>
+										<option value="3hour" selected="selected">3小时</option>
+										<option value="3day">3天</option>
+										<option value="7day">7天</option>
+									</select><br>
+								</div>
+								<button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
+								
+							</form>
 						</div>
 					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<div class="main_input_box">
-							<span class="add-on bg_ly">
-							<i><img height="37" src="${ pageContext.request.contextPath }/login/suo.png" /></i>
-							</span><input type="password" name="upwd" id="password" placeholder="请输入密码" class="keypad"/>
+					<div class="right">
+						<div class="overlay"></div>
+						<div class="content text">
+							<h1 class="heading">欢迎来到小趣社用户登录界面</h1>
+							<p>Design by mjh</p>
 						</div>
 					</div>
+					<div class="clearfix"></div>
 				</div>
-				<div>
-					<label style="display: inline-block;background-color: RGB(204,222,236);width: 135px;height: 33px;line-height: 33px;">选择免登录的时间</label>
-			 		<select style="margin-top: 8px;" name="noLogin" class="text_field select_field">
-						<option value="3min">3分钟</option>
-						<option value="3hour" selected="selected">3小时</option>
-						<option value="3day">3天</option>
-						<option value="7day">7天</option>
-					</select>
-				</div>
-				<div style="margin-top: 10px;">
-					<label style="display: inline-block;background-color: RGB(204,222,236);width: 68px;height: 33px;line-height: 33px;">验证码：</label>
-					<input style="margin-top: 8px;width: 90px;" type="text" name="code"/>
-					<img src="image" id="scode" onclick="changeCode()"/><a href="javascript:changeCode()">看不清换一张</a>
-				</div>
-				<div style="margin-top: 10px;" id="login_control">
-					<span class="pull-right" style="padding-right:3%;margin-right:30px;"><a href="bg2.jsp" class="btn btn-success">前往注册</a></span>
-					<span class="pull-right"><input type="submit" onclick="severCheck();" class="flip-link btn btn-info" id="to-recover"  value="登录"></span>
-	        	</div>
-			</form>
-</div>
-<script>
-function getNameText(){
-	var nameVal = $("#username").val();
-	nameVal = $.trim(nameVal);
-	var dir = 
-	$.get("${pageContext.request.contextPath}/validataImg",{ "uname": nameVal,"time":new Date()},function(data){
-		$("#headImg").attr("src","${ pageContext.request.contextPath }/images/"+data);
-	});
-}
-//得到验证码
-function changeCode(){
-	var img = document.getElementById("scode");
-	console.log(img+"====sda");
-	
-	img.src = "image?time="+new Date().getTime();
-}
-</script>
+			</div>
+		</div>
+	</div>
+	<!-- END WRAPPER -->
+	<script>
+		function changeCode(){
+			var img = document.getElementById("scode");
+			img.src = "${basePath}/image?time="+new Date().getMilliseconds();
+		}
+	</script>
 </body>
 </html>

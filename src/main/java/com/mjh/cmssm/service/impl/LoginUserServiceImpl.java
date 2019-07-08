@@ -40,11 +40,6 @@ public class LoginUserServiceImpl implements ILoginUserService {
 	}
 
 	@Override
-	public int selectByUserName(String username) {
-		return loginUserMapper.selectByUserName(username);
-	}
-
-	@Override
 	public LoginUser selectgetUserByName(String username) {
 		return loginUserMapper.selectgetUserByName(username);
 	}

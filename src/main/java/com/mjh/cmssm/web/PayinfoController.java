@@ -22,15 +22,16 @@ import com.mjh.cmssm.service.IPayinfoService;
 @RequestMapping("/payinfo")
 public class PayinfoController {
 	@Autowired private IPayinfoService payinfoService;
-	
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		//引入pageHelper分页插件，在查询之前只需要调用，传入页码以及分页每页的大小
-        PageHelper.startPage(pn, 5);
+        PageHelper.startPage(pn, 4);
         //startPage后面紧跟着这个查询就是一个分页查询
 		List<PayinfoExtend> users = payinfoService.selectAll();
 		//连续显示的页数是5页
-		PageInfo<PayinfoExtend> pageInfo = new PageInfo<>(users, 5);
+		PageInfo<PayinfoExtend> pageInfo = new PageInfo<PayinfoExtend>(users, 5);
+		
 		model.addAttribute("pageInfo", pageInfo);
 		return "admin/payinfolist";
 	}

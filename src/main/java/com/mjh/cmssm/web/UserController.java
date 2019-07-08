@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -43,35 +43,72 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/reg", method = RequestMethod.POST)
-    public String addUser(LoginUser loginUser){
-    	if(loginUser != null) {
+    public String addUser(HttpServletRequest request){
+		String uname = request.getParameter("lName");
+		String upwd = request.getParameter("lPwd");
+		String code = request.getParameter("code");
+		String sCode = (String) request.getSession().getAttribute("sCode");
+		if(!code.equalsIgnoreCase(sCode)){
+			request.setAttribute("msg", "验证码输入错误！");
+			System.out.println("验证码输入错误");
+			return "app/register";
+		}
+    	if(!uname.trim().equals("") && !upwd.trim().equals("")) {
+    		LoginUser loginUser = new LoginUser();
+    		loginUser.setlName(uname);
     		// MD5进行密码加密
-    		loginUser.setLpwd(DigestUtils.md5DigestAsHex(loginUser.getLpwd().getBytes()));
+    		loginUser.setlPwd(DigestUtils.md5DigestAsHex(upwd.getBytes()));
     		iLoginUserService.insert(loginUser);
-    	}
-        return "app/login";
+    		request.setAttribute("msg", "注册成功！");
+			System.out.println("注册成功");
+    		return "app/login";
+    	}else {
+    		request.setAttribute("msg", "请正确填写！");
+			System.out.println("请正确填写");
+			return "app/register";
+		}
     }
 	
 	@RequestMapping(value = "/login", method= RequestMethod.POST)
-    public ModelAndView userLogin(String username, String password, HttpSession session, ModelAndView model) {
-		if(iLoginUserService.selectByUserName(username) == 0) {
-			model.addObject("message","登录名错误，请重新输入");
-            model.setViewName("app/login");
-            return model;
+    public String userLogin(HttpServletRequest request) {
+		String uname = request.getParameter("lName");
+		String upwd = request.getParameter("lPwd");
+		String noLogin = request.getParameter("noLogin");
+		String code = request.getParameter("code");
+		String sCode = (String) request.getSession().getAttribute("sCode");
+		if(!code.equalsIgnoreCase(sCode)){
+			request.setAttribute("msg", "验证码输入错误！");
+			System.out.println("验证码输入错误");
+			return "app/login";
+		}
+		System.out.println("登录名："+uname);
+		LoginUser loginUser = iLoginUserService.selectgetUserByName(uname);
+		if(loginUser == null) {
+			request.setAttribute("msg", "登录名输入错误！");
+			System.out.println("登录名输入错误");
+			return "app/login";
 		}
 		//用户名和密码都正确，正常登录
-		LoginUser loginUser = iLoginUserService.selectgetUserByName(username);
-        if (loginUser != null && (loginUser.getLpwd()).equals(DigestUtils.md5DigestAsHex(password.getBytes()))) {
-            //将用户名保存在session中
-            session.setAttribute("username", loginUser.getLname());
-            model.setViewName("app/index");
-            return model;
+        if (loginUser != null && (loginUser.getlPwd()).equals(DigestUtils.md5DigestAsHex(upwd.getBytes()))) {
+        	switch (noLogin) {
+			case "3hour":
+				setSession(request, "username", uname, 3*60);
+				break;
+			case "3day":
+				setSession(request, "username", uname, 3*24*60);
+				break;
+			case "7day":
+				setSession(request, "username", uname, 7*24*60);
+				break;
+			default:
+				setSession(request, "username", uname, 3);
+			}
+			return "app/index";
         } else {
-            //用户名正确但是密码错误
-            model.addObject("message","密码错误，请重新输入");
-            model.setViewName("app/login");
+        	request.setAttribute("msg", "密码输入错误！");
+			System.out.println("密码输入错误");
+			return "app/login";
         }
-		return model;
     }
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -101,7 +138,7 @@ public class UserController {
 	@RequestMapping(value = "/del/{hid}", method = RequestMethod.DELETE)
 	public Msg del(@PathVariable("hid") String ids) {
 		System.out.println(ids);
-		if (ids.indexOf(",") == -1) {
+		if (!ids.contains(",")) {
             userService.deleteByPrimaryKey(Integer.parseInt(ids));
         } else {
             String[] idArr = ids.split(",");
@@ -137,4 +174,10 @@ public class UserController {
         }
         return Msg.fail();
     }
+	
+	protected void setSession(HttpServletRequest request, String key, String value, int timeNum) {
+		HttpSession session = request.getSession();
+		session.setAttribute(key, value);
+		session.setMaxInactiveInterval(timeNum*60);
+	}
 }

@@ -18,15 +18,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.mjh.cmssm.domain.Dorepair;
 import com.mjh.cmssm.domain.Repairinfo;
 import com.mjh.cmssm.domain.RepairinfoExtend;
 import com.mjh.cmssm.dto.Msg;
+import com.mjh.cmssm.service.IDorepairService;
 import com.mjh.cmssm.service.IRepairinfoService;
 
 @Controller
 @RequestMapping("/repairinfo")
 public class RepairinfoController {
 	@Autowired private IRepairinfoService riService;
+	@Autowired private IDorepairService drService;
 	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
@@ -38,7 +41,7 @@ public class RepairinfoController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		//引入pageHelper分页插件，在查询之前只需要调用，传入页码以及分页每页的大小
-        PageHelper.startPage(pn, 5);
+        PageHelper.startPage(pn, 4);
         //startPage后面紧跟着这个查询就是一个分页查询
 		List<RepairinfoExtend> users = riService.selectAll();
 		//连续显示的页数是5页
@@ -78,6 +81,17 @@ public class RepairinfoController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public Msg save(Repairinfo house) {
         riService.insert(house);
+        
+        int rid = riService.selectRidByRcode(house.getRcode());
+        System.out.println("Rid为"+rid);
+        Dorepair dorepair = new Dorepair();
+        dorepair.setDid(null);
+        dorepair.setDmoney(0);
+        dorepair.setDtime(new Date());
+        dorepair.setRid(rid);
+        dorepair.setSid(102);
+        System.out.println(dorepair);
+        System.out.println("结果"+drService.insert(dorepair));
         return Msg.success();
     }
 }

@@ -21,7 +21,7 @@ public class GenCodeController {
 		
 		ValidateCode vc = new ValidateCode(110, 25, 4, 9);
 		request.getSession().setAttribute("sCode", vc.getCode());
-		System.out.println("fdd"+vc.getCode());
+		System.out.println("验证码："+vc.getCode());
 		try {
 			vc.write(response.getOutputStream());
 		} catch (IOException e) {

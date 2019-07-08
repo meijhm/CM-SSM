@@ -19,18 +19,27 @@
 	<link rel="icon" type="image/png" sizes="96x96" href="${basePath}/resources/images/admin/favicon.png">
 </head>
 <body>
+<% 
+String msg = (String)request.getAttribute("msg");
+if(msg != null){
+	session.invalidate();
+	out.print("<script>alert('"+msg+"');</script>");
+}
+
+%>
+<div style="margin-top: 10px;margin-left: 85%;margin-bottom: -25px;"><a href="${basePath}/applogin">前端登录</a></div>
 <!-- WRAPPER -->
-	<div id="wrapper" style="margin-top:85px;">
+	<div id="wrapper" style="margin-top:60px;">
 		<div class="vertical-align-wrap">
 			<div class="vertical-align-middle">
 				<div class="auth-box ">
 					<div class="left">
-						<div class="content">
+						<div class="content" style="width: 98%">
 							<div class="header">
 								<div class="logo text-center"><img src="${basePath}/resources/images/admin/logo.png" alt="Amazing"></div>
 								<p class="lead">Login to your account</p>
 							</div>
-							<form class="form-auth-small" action="${basePath}/admin/doLogin">
+							<form class="form-auth-small" action="${basePath}/admin/login">
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">用户名</label>
 									<input type="text" class="form-control" name="aName" id="signin-email" placeholder="您的用户名...">
@@ -42,7 +51,7 @@
 								<div class="form-group">
 									<label for="signin-yzm" class="control-label sr-only">验证码</label>
 									<input type="text" class="form-control" name="code" id="signin-yzm" placeholder="请输入验证码...">
-									<img src="image" id="scode" onclick="changeCode()"/>
+									<img src="${basePath}/image?time=12" id="scode" onclick="changeCode()"/>
 									<span id="checkcode_span"></span>
 									<br>
 								</div>

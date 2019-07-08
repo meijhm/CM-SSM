@@ -15,4 +15,6 @@ public interface IRepairinfoService {
     List<RepairinfoExtend> selectAll();
 
     int updateByPrimaryKey(Repairinfo record);
+    
+    int selectRidByRcode(String rCode);
 }

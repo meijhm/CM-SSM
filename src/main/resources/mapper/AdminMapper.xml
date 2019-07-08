@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mjh.cmssm.dao.AdminMapper">
+<!--redis缓存-->
+  <cache type="com.mjh.cmssm.dao.RedisCache"/>
   <resultMap id="BaseResultMap" type="com.mjh.cmssm.domain.Admin">
     <id column="aId" jdbcType="INTEGER" property="aid" />
     <result column="aName" jdbcType="CHAR" property="aname" />

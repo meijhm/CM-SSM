@@ -125,6 +125,6 @@ insert into user values(null,'业主0001',"张三","123","男","15744552344","2017-8-
 insert into staffRepair values(null,"wx1001","王师傅","123","男","19922337654",0.88,"蓝色"),(null,"wx1011","李师傅","123","男","13922337654",0.85,"绿色"),(null,"wx0000","暂无","1","男","139234337654",1,"绿色");
 insert into chargeItem values(null,"d1001","电费","1元/度"),(null,"s1005","水费","10元/吨");
 insert into payInfo values(null,"user1012","2017-8-17",700,"交了电费","已收取",101,100),(null,"user1022","2017-8-17",300,"要交水费了","未收取",100,101);
-insert into repairInfo values(null,"wxd1223","2017-8-19",'<img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/0.gif" alt="[微笑]">电视坏了，需要维修',"未受理",100),(null,"wxd1333","2017-8-20",'空调坏了，需要维修<img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/36.gif" alt="[酷]"><img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/36.gif" alt="[酷]"><img src="http://localhost:8080/CM-SSM/resources/app/js/images/face/57.gif" alt="[来]">',"未受理",101);
+insert into repairInfo values(null,"wxd1223","2017-8-19",'电视坏了，需要维修',"未受理",100),(null,"wxd1333","2017-8-20",'空调坏了，需要维修',"未受理",101);
 insert into doRepair values(null,"2017-8-20",70,100,101),(null,"2017-8-21",90,101,100);
 insert into loginuser values(null,"张三","202cb962ac59075b964b07152d234b70"),(null,"李四","81dc9bdb52d04dc20036dbd8313ed055");

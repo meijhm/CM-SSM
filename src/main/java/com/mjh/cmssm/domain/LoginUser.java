@@ -3,56 +3,36 @@ package com.mjh.cmssm.domain;
 import java.io.Serializable;
 
 public class LoginUser implements Serializable {
-    private Integer lid;
+    private Integer lId;
 
-    private String lname;
+    private String lName;
 
-    private String lpwd;
-
-    private String lheadimg;
-
-    private String utheme;
+    private String lPwd;
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getLid() {
-        return lid;
+    public Integer getlId() {
+        return lId;
     }
 
-    public void setLid(Integer lid) {
-        this.lid = lid;
+    public void setlId(Integer lId) {
+        this.lId = lId;
     }
 
-    public String getLname() {
-        return lname;
+    public String getlName() {
+        return lName;
     }
 
-    public void setLname(String lname) {
-        this.lname = lname == null ? null : lname.trim();
+    public void setlName(String lName) {
+        this.lName = lName == null ? null : lName.trim();
     }
 
-    public String getLpwd() {
-        return lpwd;
+    public String getlPwd() {
+        return lPwd;
     }
 
-    public void setLpwd(String lpwd) {
-        this.lpwd = lpwd == null ? null : lpwd.trim();
-    }
-
-    public String getLheadimg() {
-        return lheadimg;
-    }
-
-    public void setLheadimg(String lheadimg) {
-        this.lheadimg = lheadimg == null ? null : lheadimg.trim();
-    }
-
-    public String getUtheme() {
-        return utheme;
-    }
-
-    public void setUtheme(String utheme) {
-        this.utheme = utheme == null ? null : utheme.trim();
+    public void setlPwd(String lPwd) {
+        this.lPwd = lPwd == null ? null : lPwd.trim();
     }
 
     @Override
@@ -61,11 +41,9 @@ public class LoginUser implements Serializable {
         sb.append(getClass().getSimpleName());
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
-        sb.append(", lid=").append(lid);
-        sb.append(", lname=").append(lname);
-        sb.append(", lpwd=").append(lpwd);
-        sb.append(", lheadimg=").append(lheadimg);
-        sb.append(", utheme=").append(utheme);
+        sb.append(", lId=").append(lId);
+        sb.append(", lName=").append(lName);
+        sb.append(", lPwd=").append(lPwd);
         sb.append("]");
         return sb.toString();
     }

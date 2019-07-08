@@ -22,10 +22,18 @@ import com.mjh.cmssm.service.IStaffrepairService;
 public class StaffrepairController {
 	@Autowired private IStaffrepairService staffrepairService;
 
+	@ResponseBody
+	@RequestMapping(value = "/listall", method = RequestMethod.GET)
+	public List<Staffrepair> listall(Model model) {
+		List<Staffrepair> staffrepairs = staffrepairService.selectAll();
+		model.addAttribute("staffrepairs", staffrepairs);
+		return staffrepairs;
+	}
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String list(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
 		//引入pageHelper分页插件，在查询之前只需要调用，传入页码以及分页每页的大小
-        PageHelper.startPage(pn, 1);
+        PageHelper.startPage(pn, 4);
         //startPage后面紧跟着这个查询就是一个分页查询
 		List<Staffrepair> users = staffrepairService.selectAll();
 		//连续显示的页数是5页

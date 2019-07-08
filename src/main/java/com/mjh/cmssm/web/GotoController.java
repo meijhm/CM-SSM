@@ -21,4 +21,8 @@ public class GotoController {
 	public String appLogin() {
 		return "app/login";
 	}
+	@RequestMapping("/appreg")
+	public String appReg() {
+		return "app/register";
+	}
 }

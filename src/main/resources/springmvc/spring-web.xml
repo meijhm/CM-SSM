@@ -8,7 +8,7 @@
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context.xsd
 	http://www.springframework.org/schema/mvc
-	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<!-- 配置SpringMVC -->
 	<!-- 1.开启SpringMVC注解模式 -->
 	<!-- 简化配置： (1)自动注册DefaultAnootationHandlerMapping,AnotationMethodHandlerAdapter 
@@ -42,6 +42,15 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
+<!--  				<mvc:exclude-mapping path="/**/fonts/*"/>
+				<mvc:exclude-mapping path="/**/*.css"/>
+				<mvc:exclude-mapping path="/**/*.js"/>
+				<mvc:exclude-mapping path="/**/*.png"/>
+				<mvc:exclude-mapping path="/**/*.gif"/>
+				<mvc:exclude-mapping path="/**/*.jpg"/>
+				<mvc:exclude-mapping path="/**/*.jpeg"/>
+				<mvc:exclude-mapping path="/**/*login*"/>
+				<mvc:exclude-mapping path="/**/*Login*"/> -->
 			<bean class="com.mjh.cmssm.interceptor.LoginInterceptor"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
@@ -65,9 +74,4 @@
 			</list>
 		</property>
 	</bean>
-	<!-- 配置拦截器 -->
-	<!-- <mvc:interceptors> <mvc:interceptor> <mvc:mapping path="/**" /> 除了什么以外的请求都能拦截 
-		<mvc:exclude-mapping path="/fun/gologin" /> <mvc:exclude-mapping path="/fun/dologin" 
-		/> <mvc:exclude-mapping path="/fun/doupl" /> <mvc:exclude-mapping path="/fun/goupl" 
-		/> <bean class="intercept.MyIntercept"></bean> </mvc:interceptor> </mvc:interceptors> -->
 </beans>

@@ -1,14 +1,16 @@
 # 小趣社
-#### 项目背景
-&emsp;&emsp;如今，物业管理系统是现代小区不可缺少的一部分，而互联网行为已经融入人们的生活当中，网上报修、缴费等相关业务办理已经代替传统物业管理模式，做这个让互联网与传统行业进行融合的“互联网+”项目就很有必要。
+#### 项目目的和意义
+&emsp;&emsp;小区管理是现代温馨小区必不可少的一部分，互联网的高速发展，势必将传统的小区管理模式转变为“互联网+”的小区管理模式，人们已经融入到了互联网的时代中。
+&emsp;&emsp;本系统的目的是为了方便管理小区，为了方便居民交流。
+&emsp;&emsp;本系统的意义有，第一，本系统能方便的进行物业管理，从而减轻小区物业管理员的负担；第二，本系统有交流管理模块，能让居民在小区里多些交流，能发布一些有趣的活动通知，提高居民的幸福感。新型小区管理模式的小趣社核心是互联网+小区物业管理+通知交流。
 
 #### 项目介绍
-&emsp;&emsp;这是一个基于ssm的互联网+小区管理+社区交流的项目  
+&emsp;&emsp;这是一个基于ssm的互联网+小区物业管理+通知交流的项目  
 **技术点：**  
 &emsp;&emsp;使用Mybatis分页插件PageHelper  
 &emsp;&emsp;使用redis做Mybatis的二级缓存  
 &emsp;&emsp;使用Spring自带的md5加密工具类  
-&emsp;&emsp;使用Tomcat搭建图片服务器，使用commons-fileupload文件上传组件上传文件  
+&emsp;&emsp;使用commons-fileupload文件上传组件上传文件  
 &emsp;&emsp;使用Spring的拦截器控制访问  
 &emsp;&emsp;使用阿里巴巴的druid连接池  
 &emsp;&emsp;maven项目  
@@ -25,9 +27,10 @@
 
 #### 项目截图
 ##### 前台截图
-![前台截图1](https://images.gitee.com/uploads/images/2018/0910/142100_e2b9c755_2168022.png "TIM截图12.png")
-![前台截图2](https://images.gitee.com/uploads/images/2018/0910/142132_9f684996_2168022.png "TIM截图11.png")
-![前台截图3](https://images.gitee.com/uploads/images/2018/0910/142149_736c01b4_2168022.png "图片8.png")
+![前台截图1](https://images.gitee.com/uploads/images/2018/0910/142100_e2b9c755_2168022.png"TIM截图12.png")
+![前台截图2](https://images.gitee.com/uploads/images/2018/0910/142132_9f684996_2168022.png"TIM截图11.png")
+![前台截图3](https://images.gitee.com/uploads/images/2018/0910/142149_736c01b4_2168022.png"图片8.png")
+
 ##### 后台截图
 ![后台截图1](https://images.gitee.com/uploads/images/2018/0910/142207_1748eccd_2168022.png "图片3.png")
 ![后台截图2](https://images.gitee.com/uploads/images/2018/0910/142232_69ccd611_2168022.png "图片4.png")

@@ -50,4 +50,9 @@ public class RepairinfoServiceImpl implements IRepairinfoService {
 		return riMapper.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public int selectRidByRcode(String rCode) {
+		return riMapper.selectRidByRcode(rCode);
+	}
+
 }

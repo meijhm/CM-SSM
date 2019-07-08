@@ -27,7 +27,7 @@
   <div class="layui-form-item">
     <label class="layui-form-label">申请时间</label>
     <div class="layui-input-block">
-      <input id="b" type="text" name="rtime" class="layui-input">
+      <input id="b" readonly="true" type="text" name="rtime" class="layui-input">
     </div>
   </div>
   
@@ -39,12 +39,12 @@
   <div class="layui-form-item">
     <label class="layui-form-label">维修状态</label>
     <div class="layui-input-block">
-      <input id="c" type="text" name="rstatus" class="layui-input">
+      <input id="c" readonly="true" type="text" name="rstatus" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item">
     <div class="layui-input-block">
-      <input id="d" type="hidden" name="uid" value="4" class="layui-input">
+      <input id="d" type="hidden" name="uid" value="100" class="layui-input">
     </div>
   </div>
   <button type="button" id="mysub" class="layui-btn">提交</button>
@@ -65,29 +65,26 @@ layui.use('layedit', function(){
 	  
 	});
 
-function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    var currentdate = year + seperator1 + month + seperator1 + strDate;
-    return currentdate;
+function timestampToTime(timestamp) {
+  var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+  Y = date.getFullYear() + '-';
+  M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+  D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';
+  h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+  m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';
+  s = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
+  return Y+M+D+h+m+s;
 }
 $(function(){
-	$("#a").val("wx"+Math.random()*10);
-	$("#b").val(getNowFormatDate());
+	$("#a").val("wxd"+new Date().getTime()+Math.floor(Math.random() * 10)); // Math.floor(n); 返回小于等于n的最大整数。
+	$("#b").val(timestampToTime(new Date().getTime()));
 	$("#c").val("未受理");
 });
 
 	
 $("#mysub").click(function(){
+ 	var iframe = document.getElementsByName("LAY_layedit_1")[0];
+	$("#demo").val(iframe.contentWindow.document.body.innerHTML);
 	alert($(".layui-form").serialize());
 	$.ajax({
         url:"${basePath}/repairinfo/save",
@@ -95,8 +92,12 @@ $("#mysub").click(function(){
         // 序列化的表单数据，通过jQuery的serialize方法
         data:$(".layui-form").serialize(),
         success:function (result) {
-           	alert(result);
-
+           	//console.log(result);
+           	if(result.code == 200){
+           		alert("发送成功");
+           	}else {
+           		alert("发送失败！");
+			}
         }
     });
 });

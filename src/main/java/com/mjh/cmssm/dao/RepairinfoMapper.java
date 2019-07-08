@@ -13,4 +13,6 @@ public interface RepairinfoMapper {
     List<Repairinfo> selectAll();
 
     int updateByPrimaryKey(Repairinfo record);
+    
+    int selectRidByRcode(String rCode);
 }

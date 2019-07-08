@@ -4,10 +4,10 @@
 <!--  缴欠费信息开始 -->
 <div class="page-container">
     <div class="main-content">
-				<div class="container-fluid">
+				<div class="layui-container">
 				<h3 class="page-title">下面是小区的缴欠费信息：</h3>
 				
-	            <table class="table table-hover table-striped table-bordered" id="emps_table">
+	            <table class="layui-table" id="emps_table">
 	                <thead>
 	                    <tr>
 	                        <th>缴欠费编号</th>
@@ -61,16 +61,16 @@
             }
         });
     }
-     function timestampToTime(timestamp) {
-         var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-         Y = date.getFullYear() + '-';
-         M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-         D = date.getDate() + ' ';
-         h = date.getHours() + ':';
-         m = date.getMinutes() + ':';
-         s = date.getSeconds();
-         return Y+M+D+h+m+s;
-     }
+	function timestampToTime(timestamp) {
+		var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+		Y = date.getFullYear() + '-';
+		M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+		D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';
+		h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+		m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';
+		s = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
+		return Y+M+D+h+m+s;
+	}
     /**
      * 信息的显示
      * @param result 服务器返回的json数据

@@ -8,26 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * 管理员登录控制
+ * 自定义拦截器
  */
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        
-    	String url=request.getRequestURI();
-    	
-        if(url.indexOf("login")>=0){
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
+        String url = request.getRequestURI();
+        if (url.contains("login") || url.contains("reg") || url.contains("image")
+                || url.contains(".css") || url.contains(".js") || url.contains("fonts")) {
             return true;
         }
-        HttpSession session=request.getSession();
-        String adminname= (String) session.getAttribute("adminname");
-        if(adminname!=null){
+        HttpSession session = request.getSession();
+        String adminname = (String) session.getAttribute("adminname");
+        if (adminname != null) {
             return true;
         }
-        return true;
-//        request.getRequestDispatcher("/WEB-INF/jsp/admin/login.jsp").forward(request,response);
-//
-//        return false;
+        String uname = (String) session.getAttribute("username");
+        if (uname != null) {
+            return true;
+        }
+
+        return false;
     }
 
     @Override

@@ -15,8 +15,6 @@ public interface ILoginUserService {
     List<LoginUser> selectAll();
 
     int updateByPrimaryKey(LoginUser record);
-    
-    int selectByUserName(String username);
-    
+        
     LoginUser selectgetUserByName(String username);
 }

@@ -22,6 +22,10 @@ public class TalkController {
 	public String toRepair() {
 		return "app/torepair";
 	}
+	@RequestMapping("/repairresult")
+	public String repairResult() {
+		return "app/repairresult";
+	}
 	@RequestMapping("/toadmin")
 	public String toAdmin() {
 		return "app/toadmin";

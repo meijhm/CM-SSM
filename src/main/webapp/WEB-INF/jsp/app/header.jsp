@@ -53,7 +53,7 @@
                                                 <a href="${basePath}/app"  title="Base Theme">
                                                         <img src="${basePath}/resources/images/logo.png" alt="Amusing">
                                                 </a>
-                                                <span class="tag-line">同在一个小区，有缘相聚，维护靠大家了</span>
+                                                <span class="tag-line">同在一个小区，有缘相聚，维护靠大家!</span>
                                         </div>
 										
 
@@ -61,8 +61,17 @@
                                         <nav class="main-nav">
                                               <div class="menu-top-menu-container">
                                                         <ul id="menu-top-menu" class="clearfix">
-                                                        		<li><a href="${basePath}/faq/list">社区规则</a></li>
-                                                                <li><a title="小区的动态信息" href="${basePath}/payinfo/listapp">小区之声</a></li>
+                                                        		<li>
+                                                        		<%
+                                                        		String uname = (String)request.getSession().getAttribute("username"); 
+                                                        		if(uname != null){ %>
+                                                        		<span style="color: white;">欢迎您：<%=uname %></span>
+                                                        		<%	
+                                                        		}
+                                                        		%>
+                                                        		</li>
+                                                        		<li><a title="小区要遵守的规则" href="#" onclick="alert('暂未开放！');">小区规则</a></li>
+                                                                
                                                                 <li class="list"><a title="发信息" href="${basePath}/talk/index">交流碰撞</a>
                                                                      <!-- <div class="morelist">
 														                <ul>
@@ -72,12 +81,12 @@
 														            </div>    -->
                                                                         
                                                                 </li>
-                                                                <li><a href="#">个人中心</a>
-                                                                        <!-- <ul class="sub-menu">
+                                                                <!-- <li><a href="#">个人中心</a>
+                                                                        <ul class="sub-menu">
                                                                                 <li><a href="full-width.html">我的空间</a></li>
                                                                                 <li><a href="elements.html">注销</a></li>
-                                                                        </ul> -->
-                                                                </li>   
+                                                                        </ul>
+                                                                </li> -->   
                                                                 <!-- <li><a href="#">皮肤</a>
                                                                         <ul class="sub-menu">
                                                                                 <li><a href="blue-skin.html">蓝色皮肤</a></li>
@@ -94,7 +103,9 @@
                                                                                 <li><a href="page.html">Sample Page</a></li>
                                                                         </ul>
                                                                 </li> -->
-                                                                <li><a href="contact.html">联系管理员</a></li>
+                                                                <li><a title="小区的信息" href="${basePath}/moving/listapp">小区动态</a></li>
+                                                                <li><a title="业主的缴欠费信息" href="${basePath}/payinfo/listapp">小区广播</a></li>
+                                                                <li><a href="${basePath}/app/logout">注销</a></li>
                                                         </ul>
                                                 </div>
                                         </nav>

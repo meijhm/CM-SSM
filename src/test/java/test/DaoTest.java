@@ -23,9 +23,6 @@ public class DaoTest extends BaseTest {
         logger.info("房子：{}",houses);
     }
     
-    @Test public void testSelectByUserName() {
-    	logger.info("数目{}",luMapper.selectByUserName("小诸葛"));
-    }
     
     @Test public void testGetUserByName() {
     	logger.info("用户{}",luMapper.selectgetUserByName("小诸葛"));

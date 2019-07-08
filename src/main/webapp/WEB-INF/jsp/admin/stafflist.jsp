@@ -39,7 +39,7 @@
 					</div>
 				</form>
 				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>支持</span></a>
+					<a class="btn btn-success update-pro" href="${basePath}/applogin" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>前端</span></a>
 				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
@@ -61,18 +61,18 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>帮助</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">基本用法</a></li>
-								<li><a href="#">Working With Data</a></li>
+								<%--<li><a href="#">Working With Data</a></li>
 								<li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li>
+								<li><a href="#">Troubleshooting</a></li>--%>
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="${basePath}/resources/images/admin/user.png" class="img-circle" alt="Avatar"> <span>Admin</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="" id="myhead" height="22px" class="img-circle" alt="Avatar"> <span><%=request.getSession().getAttribute("adminname") %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="lnr lnr-user"></i> <span>我的主页</span></a></li>
-								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息</span></a></li>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>设置</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>注销</span></a></li>
+								<li><a href="${basePath}/admin/myworld"><i class="lnr lnr-user"></i> <span>我的主页</span></a></li>
+								<%--<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息</span></a></li>
+								<li><a href="#"><i class="lnr lnr-cog"></i> <span>设置</span></a></li>--%>
+								<li><a href="${basePath}/admin/logout"><i class="lnr lnr-exit"></i> <span>注销</span></a></li>
 							</ul>
 						</li>
 						<!-- <li>
@@ -90,12 +90,13 @@
 					<ul class="nav">
 						<li><a href="${basePath}/" class=""><i class="lnr lnr-home"></i> <span>后台桌面</span></a></li>
 						<li><a href="${basePath}/house/list" class=""><i class="lnr lnr-dice"></i> <span>楼房信息</span></a></li>
-						<li><a href="${basePath}/user/list" class=""><i class="lnr lnr-user"></i> <span>用户信息</span></a></li>
+						<li><a href="${basePath}/user/list" class=""><i class="lnr lnr-user"></i> <span>业主信息</span></a></li>
 						<li><a href="${basePath}/staff/list" class="active"><i class="lnr lnr-user"></i> <span>维修员信息</span></a></li>
 						<li><a href="${basePath}/chargeitem/list" class=""><i class="lnr lnr-inbox"></i> <span>收费项目</span></a></li>
 						<li><a href="${basePath}/payinfo/list" class=""><i class="lnr lnr-bookmark"></i> <span>缴欠费信息</span></a></li>
 						<li><a href="${basePath}/repairinfo/list" class=""><i class="lnr lnr-pencil"></i> <span>申请维修信息</span></a></li>
-						<li><a href="${basePath}/dorepair/list" class=""><i class="lnr lnr-heart"></i> <span>维修处理信息</span></a></li>
+						<li><a href="${basePath}/dorepair/list" class=""><i class="lnr lnr-enter"></i> <span>维修信息处理</span></a></li>
+						<li><a href="${basePath}/moving/list" class=""><i class="lnr lnr-heart"></i> <span>小区动态信息</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -282,6 +283,16 @@
 	<script src="${basePath}/resources/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="${basePath}/resources/vendor/klorofil-common.js"></script>
 	<script>
+	$(function(){
+		$.ajax({
+            url:"${basePath}/admin/getinfo",
+            type:"GET",
+            success:function (result) {
+                console.log("当前管理员：" + result);
+            	$("#myhead").attr("src","${basePath}/static/images/"+result.aImg);
+            }
+        });
+	});
 	// 当前页面
     var curPage;
 

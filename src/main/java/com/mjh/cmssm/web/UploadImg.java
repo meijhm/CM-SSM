@@ -49,7 +49,7 @@ public class UploadImg {
 					String oriName = file.getOriginalFilename();
 					extName = oriName.substring(oriName.lastIndexOf("."));
 					// 文件的名字
-					String path = "C:\\Users\\meijianhua\\eclipse-workspace\\CM-SSM\\src\\main\\webapp\\static\\images\\" + fileName + extName;
+					String path = request.getSession().getServletContext().getRealPath("/static/images").replace("\\", "/") + "/" + fileName + extName;
 					// 上传路径
 					File localFile = new File(path);
 					try {
@@ -64,21 +64,21 @@ public class UploadImg {
 		}
 		model.addAttribute("fname", fileName+extName);
 		Admin admin = new Admin();
-		System.out.println(aname+"==="+fileName+extName);
-		Admin admin2 = iAdminService.getAdminByName("admin");
-		System.out.println("市场:"+admin2.getAid());
+		System.out.println("新管理员名："+aname+"文件名："+fileName+extName);
+		Admin admin2 = iAdminService.getAdminByName((String) request.getSession().getAttribute("adminname"));
+		System.out.println("旧管理员:"+admin2);
 		admin.setAname(aname);
 		admin.setAid(admin2.getAid());
 		admin.setApwd(admin2.getApwd());
 		admin.setaImg(fileName+extName);
-		System.out.println("结果"+iAdminService.updateByPrimaryKey(admin));
+		System.out.println("更新结果："+iAdminService.updateByPrimaryKey(admin));
+		request.getSession().setAttribute("adminname", aname);
+		request.getSession().setMaxInactiveInterval(3*24*60*60);
 		return "admin/myworld";
 	}
 	
 	@RequestMapping("/dologin")
 	public String doLogin(@RequestParam(value="name",required=true)String uname, Model model) {
-//		System.out.println("2er"+uname);
-//		model.addAttribute("username", uname);	
 		return "redirect:/index.jsp";
 	}
 }

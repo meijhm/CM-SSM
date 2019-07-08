@@ -39,7 +39,7 @@
 					</div>
 				</form>
 				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="#downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>支持</span></a>
+					<a class="btn btn-success update-pro" href="${basePath}/applogin" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>前端</span></a>
 				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
@@ -61,18 +61,18 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>帮助</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#">基本用法</a></li>
-								<li><a href="#">Working With Data</a></li>
+								<%--<li><a href="#">Working With Data</a></li>
 								<li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li>
+								<li><a href="#">Troubleshooting</a></li>--%>
 							</ul>
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="${basePath}/resources/images/admin/user.png" class="img-circle" alt="Avatar"> <span>Admin</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="" id="myhead" height="22px" class="img-circle" alt="Avatar"> <span><%=request.getSession().getAttribute("adminname") %></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
-								<li><a href="#"><i class="lnr lnr-user"></i> <span>我的主页</span></a></li>
-								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息</span></a></li>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>设置</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>注销</span></a></li>
+								<li><a href="${basePath}/admin/myworld"><i class="lnr lnr-user"></i> <span>我的主页</span></a></li>
+								<%--<li><a href="#"><i class="lnr lnr-envelope"></i> <span>消息</span></a></li>
+								<li><a href="#"><i class="lnr lnr-cog"></i> <span>设置</span></a></li>--%>
+								<li><a href="${basePath}/admin/logout"><i class="lnr lnr-exit"></i> <span>注销</span></a></li>
 							</ul>
 						</li>
 					</ul>
@@ -87,12 +87,13 @@
 					<ul class="nav">
 						<li><a href="${basePath}/" class=""><i class="lnr lnr-home"></i> <span>后台桌面</span></a></li>
 						<li><a href="${basePath}/house/list" class=""><i class="lnr lnr-dice"></i> <span>楼房信息</span></a></li>
-						<li><a href="${basePath}/user/list" class=""><i class="lnr lnr-user"></i> <span>用户信息</span></a></li>
+						<li><a href="${basePath}/user/list" class=""><i class="lnr lnr-user"></i> <span>业主信息</span></a></li>
 						<li><a href="${basePath}/staff/list" class=""><i class="lnr lnr-user"></i> <span>维修员信息</span></a></li>
 						<li><a href="${basePath}/chargeitem/list" class=""><i class="lnr lnr-inbox"></i> <span>收费项目</span></a></li>
 						<li><a href="${basePath}/payinfo/list" class=""><i class="lnr lnr-bookmark"></i> <span>缴欠费信息</span></a></li>
 						<li><a href="${basePath}/repairinfo/list" class=""><i class="lnr lnr-pencil"></i> <span>申请维修信息</span></a></li>
-						<li><a href="${basePath}/dorepair/list" class="active"><i class="lnr lnr-heart"></i> <span>维修处理信息</span></a></li>
+						<li><a href="${basePath}/dorepair/list" class="active"><i class="lnr lnr-enter"></i> <span>维修信息处理</span></a></li>
+						<li><a href="${basePath}/moving/list" class=""><i class="lnr lnr-heart"></i> <span>小区动态信息</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -113,43 +114,44 @@
                 	<div class="form-group">
                         <label for="id_update_label" class="col-sm-2 control-label">id</label>
                         <div class="col-sm-10">
-                            <p class="form-control-static" id="id_update_label" name="hid"></p>
+                            <p class="form-control-static" id="id_update_label"></p>
                             <span class="help-block"></span>
                         </div>
                     </div>
                     <div class="form-group">
-                            <label for="name_update_input" class="col-sm-2 control-label">楼房编号</label>
+                            <label for="name_update_input" class="col-sm-2 control-label">上门维修时间</label>
                             <div class="col-sm-10">
-                                <input type="text" name="hcode" class="form-control" id="name_update_input" placeholder="请输入这栋楼的名字">
+                                <input type="date" name="dtime" class="form-control" id="name_update_input">
                                 <span class="help-block"></span>
                             </div>
                         </div>
                         <div class="form-group">
-                        <label for="address_update_input" class="col-sm-2 control-label">位置</label>
+                        <label for="address_update_input" class="col-sm-2 control-label">维修估计费用</label>
                             <div class="col-sm-10">
-                                <input type="text" name="hsite" class="form-control" id="address_update_input" placeholder="请输入这栋楼的位置">
+                                <input type="text" name="dmoney" class="form-control" id="address_update_input" placeholder="请输入维修需要的费用">
                                 <span class="help-block"></span>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">维修员名字</label>
+                            <div class="col-sm-10">
+                                <select name="sid" id="ms">
+                                </select>
+                            </div>
+                        </div>
+                    <div class="form-group">
+                        <input type="hidden" name="rid" class="form-control" id="wxd_update_input">
+                        <%--<label for="wxd_update_input" class="col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+
+                            <span class="help-block"></span>
+                        </div>--%>
                     </div>
-                        <div class="form-group">
-                            <label for="area_update_input" class="col-sm-2 control-label">面积</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="harea" class="form-control" id="area_update_input" placeholder="请输入这栋楼的占地面积">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="height_update_input" class="col-sm-2 control-label">层数</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="hheight" class="form-control" id="height_update_input" placeholder="请输入这栋楼的总层数">
-                                <span class="help-block"></span>
-                            </div>
-                        </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="update_save_button">Update</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary" id="update_save_button">更新</button>
             </div>
         </div>
     </div>
@@ -206,7 +208,7 @@
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
-				<h3 class="page-title">申请维修信息</h3>
+				<h3 class="page-title">维修处理信息</h3>
 					<%--按钮--%>
     <div class="row">
         <div class="col-md-4 col-md-offset-8">
@@ -270,6 +272,16 @@
 	<script src="${basePath}/resources/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="${basePath}/resources/vendor/klorofil-common.js"></script>
 	<script>
+	$(function(){
+		$.ajax({
+            url:"${basePath}/admin/getinfo",
+            type:"GET",
+            success:function (result) {
+                console.log("当前管理员：" + result);
+            	$("#myhead").attr("src","${basePath}/static/images/"+result.aImg);
+            }
+        });
+	});
 	// 当前页面
     var curPage;
 
@@ -297,16 +309,16 @@
         
 	
     }
-     function timestampToTime(timestamp) {
-         var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
-         Y = date.getFullYear() + '-';
-         M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
-         D = date.getDate() + ' ';
-         h = date.getHours() + ':';
-         m = date.getMinutes() + ':';
-         s = date.getSeconds();
-         return Y+M+D+h+m+s;
-     }
+    function timestampToTime(timestamp) {
+        var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+        Y = date.getFullYear() + '-';
+        M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        D = (date.getDate() < 10 ? '0'+date.getDate() : date.getDate()) + ' ';
+        h = (date.getHours() < 10 ? '0'+date.getHours() : date.getHours()) + ':';
+        m = (date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes()) + ':';
+        s = date.getSeconds() < 10 ? '0'+date.getSeconds() : date.getSeconds();
+        return Y+M+D+h+m+s;
+    }
     /**
      * 信息的显示
      * @param result 服务器返回的json数据
@@ -327,8 +339,8 @@
             var time = timestampToTime(item.dtime);
             var genderTd = $("<td></td>").append(time);
             var emailTd = $("<td></td>").append(item.dmoney);
-            var departmentTd = $("<td></td>").append(item.staff.sname);
-            var ustarttime = $("<td></td>").append(item.repairinfo.rcode);
+            var departmentTd = $("<td></td>").append(item.staff == null ? "" : item.staff.sname);
+            var ustarttime = $("<td></td>").append(item.repairinfo == null ? "" : item.repairinfo.rcode);
 
             var editBtn = $("<button></button>").addClass("btn-primary btn-xs")
                 .append($("<span></span>").addClass("glyphicon glyphicon-pencil"))
@@ -370,11 +382,11 @@
      * 单行删除按钮被按下
     */
     function deleteOneBtnClick(employee) {
-        if (confirm("确认删除【"+employee.hcode+"】的信息吗")) {
+        if (confirm("确认删除【"+employee.did+"】的信息吗")) {
             $.ajax({
-                url:"${basePath}/chargeitem/del/" + employee.hid,
+                url:"${basePath}/dorepair/del/" + employee.did,
                 type:"DELETE",
-                success:function (result) {
+                success:function () {
                     to_page(curPage);
                 }
             });
@@ -383,15 +395,27 @@
 
     // 编辑按钮 按下
     function editBtnClick(employee) {
+        console.log("编辑按钮 按下");
+        console.log(employee);
         // 将当前信息添加到模态框中
-        $("#id_update_label").text(employee.hid);
-        $("#name_update_input").val(employee.hcode);
-        $("#address_update_input").val(employee.hsite);
-        $("#area_update_input").val(employee.harea);
-        $("#height_update_input").val(employee.hheight);
+        $("#id_update_label").text(employee.did);
+        var time = timestampToTime(employee.dtime);
+        $("#name_update_input").val(time);
+        $("#address_update_input").val(employee.dmoney);
+
+        $.get("${basePath}/staff/listall",function(data){
+            console.log(data[0]);
+            for ( var i in data) {
+                var $option = $(
+                    "<option value="+data[i].sid+" class='myopt'>"+data[i].sname+"</option>"
+                );
+                $("#ms").append($option);
+            }
+        });
+        $("#wxd_update_input").val(employee.repairinfo == null ? "" : employee.repairinfo.rid);
 
         // 将ID保存至更新按钮中
-        $("#update_save_button").attr("hid", employee.hid);
+        $("#update_save_button").attr("did", employee.did);
         // 弹出模态对话框
         $("#empUpdateModal").modal({
             backdrop:"static"
@@ -486,9 +510,9 @@
                 allId += "," + id;
             }
         });
-        if ("" != (allName) && confirm("确定要删除【" + allName + "】的信息吗")) {
+        if ("" != (allId) && confirm("确定要删除【" + allId + "】的信息吗")) {
             $.ajax({
-                url:"${basePath}/chargeitem/del/" + allId,
+                url:"${basePath}/dorepair/del/" + allId,
                 type:"DELETE",
                 success:function() {
                     to_page(curPage);
@@ -565,7 +589,7 @@
         }
 //        alert($("#empAddModal form").serialize());
         $.ajax({
-            url:"${basePath}/chargeitem/save",
+            url:"${basePath}/dorepair/save",
             method:"POST",
             // 序列化的表单数据，通过jQuery的serialize方法
             data:$("#empAddModal form").serialize(),
@@ -588,9 +612,9 @@
 
     // 修改的更新按钮被按下
     $("#update_save_button").click(function () {
-        var empId = $(this).attr("hid");
+        var empId = $(this).attr("did");
         $.ajax({
-           url:"${basePath}/chargeitem/update/" + empId,
+           url:"${basePath}/dorepair/update/" + empId,
             type:"PUT",
             data:$("#empUpdateModal form").serialize(),
             success:function (result) {
