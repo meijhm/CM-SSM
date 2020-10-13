@@ -43,13 +43,13 @@
 ![后台修改界面](https://images.gitee.com/uploads/images/2018/0910/142249_46e3927d_2168022.png "后台修改界面.png")
 
 ## 详细部署和使用方法
-###1、码云上该项目分支选择release分支（别选master不是最新代码）
-点克隆，复制链接，然后在git命令行内输入，`git clone https://xxx/.../xxx.git`  
-###2、用Idea去打开克隆下来的文件夹  
+### 1、码云上该项目分支选择release分支（别选master不是最新代码）  
+点击克隆，复制链接，然后在git命令行内输入，`git clone https://xxx/.../xxx.git`  
+### 2、用Idea去打开克隆下来的文件夹  
 Idea配置自己本地的Maven，或者默认是用自带的Maven，Maven自动导包
-###3、注意有个验证码包ValidateCode.jar要手动添加
-在CM-SSM/src/main/webapp/WEB_INF/lib/ValidateCode.jar这，右键这个jar包，选择Add as Library，然后点OK，就添加进项目了，代码不报错了。
-###4、MySQL数据库安装
+### 3、注意有个验证码包ValidateCode.jar要手动添加  
+在`CM-SSM/src/main/webapp/WEB_INF/lib/ValidateCode.jar`这，右键这个jar包，选择Add as Library，然后点OK，就添加进项目了，代码不报错了。
+### 4、MySQL数据库安装  
 现在用了最新版本8.0.21
 ```mysql
 mysql -u root -p            #无密码登录
@@ -82,18 +82,20 @@ Query OK, 0 rows affected (0.01 sec)
 			<scope>runtime</scope>
 		</dependency>
 ```
-###5、tomcat安装
+### 5、tomcat安装  
 参考网上安装配置教程，完成后，在Idea导入，先点edit Configuration，再点+添加tomcat local，之后点Configur选tomcat安装目录，就导入成功了。  
 使用热部署 war exploded模式,先点edit Configuration，然后server里最下面，before launch里的+，点击，选build Artifacts，点击后选择CM-SSM:war exploded  
 Deployment里如果没有Deploy server，就点旁边的+，选Artifact，然后选里面的CM-SSM:war exploded  
 刚开始Server里面的On 'Update' action 选Update resources，下面选项也选这个，完成热部署。  
 参考原文出处https://blog.csdn.net/java_lifeng/article/details/90020356  
-###6、Redis安装使用
+### 6、Redis安装使用  
 参考https://blog.csdn.net/weixin_37264997/article/details/80062765  
-###7、整个启动步骤
-net start mysql启动mysql，启动Redis，然后Idea中点击绿色三角形Shift+F10，运行模式运行项目，之后会跳到浏览器的http://localhost:8080/CM_SSM_war_exploded/地址，这本应该是后台桌面，因为没登录不能访问，所以是一个空白页，  
-要登录后台就要在地址后加一个login，即http://localhost:8080/CM_SSM_war_exploded/login，用户名密码就是数据库表中的初始值，都是admin，进去后管理员头像和名字可以自定义。前端登录可以点右上角的前端登录，  
-就会跳到http://localhost:8080/CM_SSM_war_exploded/applogin，用户名密码数据库也有初始值，如账号密码为张三，123。也可以自己点右上角的前往注册，注册一个账号登录。  
+### 7、整个启动步骤  
+net start mysql启动mysql，启动Redis，然后Idea中点击绿色三角形Shift+F10，运行模式运行项目，之后会跳到浏览器的http://localhost:8080/CM_SSM_war_exploded/  
+地址，这本应该是后台桌面，因为没登录不能访问，所以是一个空白页，  
+要登录后台就要在地址后加一个login，即http://localhost:8080/CM_SSM_war_exploded/login  
+管理员名密码就是数据库表中的初始值，都是admin，进去后管理员头像和名字可以自定义。前端登录可以点右上角的前端登录，就会跳到http://localhost:8080/CM_SSM_war_exploded/applogin  
+用户名密码数据库也有初始值，如账号密码为张三，123。也可以自己点右上角的前往注册，注册一个账号登录。  
 http://localhost:8080/CM_SSM_war_exploded  
 后面加/applogin跳到前端登录  
 后面加/appreg跳到前端注册  
