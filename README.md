@@ -84,9 +84,10 @@ Query OK, 0 rows affected (0.01 sec)
 ```
 ###5、tomcat安装
 参考网上安装配置教程，完成后，在Idea导入，先点edit Configuration，再点+添加tomcat local，之后点Configur选tomcat安装目录，就导入成功了。  
-使用热部署 war exploded模式,先点edit Configuration，然后server里最下面的+，点击，选build Artifacts，点击后选择CM-SSM:war exploded  
-On 'Update' action 选Update resources，下面选项也选这个  
-原文出处https://blog.csdn.net/java_lifeng/article/details/90020356  
+使用热部署 war exploded模式,先点edit Configuration，然后server里最下面，before launch里的+，点击，选build Artifacts，点击后选择CM-SSM:war exploded  
+Deployment里如果没有Deploy server，就点旁边的+，选Artifact，然后选里面的CM-SSM:war exploded  
+刚开始Server里面的On 'Update' action 选Update resources，下面选项也选这个，完成热部署。  
+参考原文出处https://blog.csdn.net/java_lifeng/article/details/90020356  
 ###6、Redis安装使用
 参考https://blog.csdn.net/weixin_37264997/article/details/80062765  
 ###7、整个启动步骤
