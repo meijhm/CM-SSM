@@ -14,6 +14,10 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String url = request.getRequestURI();
+        String contextPath = request.getContextPath();
+        if (url.equals(contextPath + "/") || url.equals(contextPath)) {
+            return true;
+        }
         if (url.contains("login") || url.contains("reg") || url.contains("image")
                 || url.contains(".css") || url.contains(".js") || url.contains("fonts")) {
             return true;

@@ -9,7 +9,7 @@ public class GotoController {
 	public String adminLogin() {
 		return "admin/login";
 	}
-	@RequestMapping("/")
+	@RequestMapping("/admin")
 	public String adminIndex() {
 		return "admin/index";
 	}
@@ -17,7 +17,7 @@ public class GotoController {
 	public String appIndex() {
 		return "app/index";
 	}
-	@RequestMapping("/applogin")
+	@RequestMapping(value = {"/", "/applogin"})
 	public String appLogin() {
 		return "app/login";
 	}

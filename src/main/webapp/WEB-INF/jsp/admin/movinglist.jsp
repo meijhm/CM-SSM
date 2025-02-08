@@ -27,7 +27,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div style="padding:0px 10px;" class="brand">
-				<a href="${basePath}/"><img src="${basePath}/resources/images/admin/logo.png" alt="Amusing Logo" class="img-responsive logo"></a>
+				<a href="${basePath}/admin"><img src="${basePath}/resources/images/admin/logo.png" alt="Amusing Logo" class="img-responsive logo"></a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -86,7 +86,7 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="${basePath}/" class=""><i class="lnr lnr-home"></i> <span>后台桌面</span></a></li>
+						<li><a href="${basePath}/admin" class=""><i class="lnr lnr-home"></i> <span>后台桌面</span></a></li>
 						<li><a href="${basePath}/house/list" class=""><i class="lnr lnr-dice"></i> <span>楼房信息</span></a></li>
 						<li><a href="${basePath}/user/list" class=""><i class="lnr lnr-user"></i> <span>业主信息</span></a></li>
 						<li><a href="${basePath}/staff/list" class=""><i class="lnr lnr-user"></i> <span>维修员信息</span></a></li>

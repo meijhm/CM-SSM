@@ -71,7 +71,7 @@ jdbc.password=abcdef
 mysql> set global time_zone='+8:00';
 Query OK, 0 rows affected (0.01 sec)
 ```
-使用navicat数据库管理工具，登录mjh用户，然后点击新建查询，把项目中sql.txt文本内容复制到查询里，点运行就把表和数据都搞好了。  
+启动MySQL，使用navicat数据库管理工具，登录mjh用户，然后点击新建查询，把项目中sql.txt文本内容复制到查询里，点运行就把表和数据都搞好了。  
 要注意：项目的pom.xml中数据库导包，要改为你对应的数据库版本，我现在用的是最新版8.0.21
 ```xml
 <!-- 2.数据库 -->
@@ -83,28 +83,31 @@ Query OK, 0 rows affected (0.01 sec)
 		</dependency>
 ```
 ### 5、tomcat安装  
-参考网上安装配置教程，完成后，在Idea导入，先点edit Configuration，再点+添加tomcat local，之后点Configur选tomcat安装目录，就导入成功了。  
-使用热部署 war exploded模式,先点edit Configuration，然后server里最下面，before launch里的+，点击，选build Artifacts，点击后选择CM-SSM:war exploded  
-Deployment里如果没有Deploy server，就点旁边的+，选Artifact，然后选里面的CM-SSM:war exploded  
-刚开始Server里面的On 'Update' action 选Update resources，下面选项也选这个，完成热部署。  
+参考网上安装配置教程，完成后，在Idea导入，先点edit Configuration，再点+添加tomcat local，之后点Configur选择自己的tomcat安装目录。  
+点击Deployment，点击下面的+号，选择Artifact，选里面的CM-SSM:war exploded  
+然后返回到Server选项卡下，找到On 'Update' action，选择Update resources，下面On frame deactivation选项也选Update resources，完成热部署。  
 参考原文出处https://blog.csdn.net/java_lifeng/article/details/90020356  
 ### 6、Redis安装使用  
 参考https://blog.csdn.net/weixin_37264997/article/details/80062765  
 ### 7、整个启动步骤  
 net start mysql启动mysql，启动Redis，然后Idea中点击绿色三角形Shift+F10，运行模式运行项目，之后会跳到浏览器的http://localhost:8080/CM_SSM_war_exploded/  
-地址，这本应该是后台桌面，因为没登录不能访问，所以是一个空白页，  
-要登录后台就要在地址后加一个login，即http://localhost:8080/CM_SSM_war_exploded/login  
-管理员名密码就是数据库表中的初始值，都是admin，进去后管理员头像和名字可以自定义。前端登录可以点右上角的前端登录，就会跳到http://localhost:8080/CM_SSM_war_exploded/applogin  
-用户名密码数据库也有初始值，如账号密码为张三，123。也可以自己点右上角的前往注册，注册一个账号登录。  
+这个地址是前台登录页面，可以访问。  
 http://localhost:8080/CM_SSM_war_exploded  
-后面加/applogin跳到前端登录  
-后面加/appreg跳到前端注册  
-后面加/login跳到后端登录  
-这三个不需要登录就可以访问，其他的如：/到后端桌面，/app到前端主页，还有一些其他功能的链接，在不登录时都是访问不了的。
+后面加/applogin 或者什么都不加 跳到前端登录  
+后面加/appreg 跳到前端注册  
+后面加/login 跳到后端登录  
+以上三个不需要登录，就可以访问。  
+其他链接比如加上：/admin跳到后端管理员主页，/app跳到前端用户主页。和其他所以的功能链接，在没有登录时，都访问不了。  
+登录后台方法：  
+在地址后加一个login，即http://localhost:8080/CM_SSM_war_exploded/login  
+输入管理员名、密码，之前数据库建表时设置了初始值，比如都是admin。  
+进入后台页面后，点击管理员头像，可以自定义名字和头像。前端登录可以点右上角的前端登录，就会跳到http://localhost:8080/CM_SSM_war_exploded/applogin  
+登录前台方法：  
+用户名密码在数据库也有初始值，比如账号密码为张三，123。也可以自己点右上角的前往注册，注册一个新的账号登录。
 ## 参与贡献
 
 ## 联系作者
 
-1. 有问题，邮箱联系我<meijhm@live.com>
-2. 我的博客 [meijhm.github.io](https://meijhm.github.io/)，欢迎来访
-3. 也可以来 [github](https://github.com/meijhm) 上 look me
+1. 邮箱联系 <meijhm@live.com>  
+2. 我的博客 [阳光白梅](https://meijhm.github.io/) ，有自己写的在线工具和教程，欢迎来访
+3. 我的github [雪中梅](https://github.com/meijhm)
